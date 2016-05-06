@@ -4,8 +4,6 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
-import edu.cs157b.hibernate.Order;
-
 public class ConcreteAttendanceDAO implements AttendanceDAO {
 	private static SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
 	
