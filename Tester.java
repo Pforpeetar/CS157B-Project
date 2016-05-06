@@ -15,7 +15,11 @@ public class Tester {
 		s.wheres.add("location");
 		s.slices.add("band.name = 'Taylor Swift'");
 		s.slices.add("date_table.year = '2016'");
+		
+		ConcreteAttendanceDAO dao = new ConcreteAttendanceDAO();
 		System.out.println(s.getStringQuery());
+		dao.findByQuery(s.getStringQuery());
+		System.out.println(dao.findByQuery(s.getStringQuery()));
 	}
 
 }

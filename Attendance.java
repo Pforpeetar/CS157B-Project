@@ -1,6 +1,16 @@
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
+
+@Entity
+@Table(name = "ATTENDANCE_TABLE")
 public class Attendance {
+	@Id
+	@GeneratedValue
 	private int id;
+	
 	private int location_id;
 	private int attendee_id;
 	private int date_id;

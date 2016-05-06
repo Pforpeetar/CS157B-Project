@@ -28,12 +28,8 @@
         <property name="hbm2ddl.auto">create</property>
  
         <!-- Mention here all the model classes along with their package name -->
-        
-        <mapping class="Band"/>
-        <mapping class="Location"/>
-        <mapping class="Date"/>
-        <mapping class="AttendeeInfo"/>
         <mapping class="Attendance"/>
+        
 </session-factory>
 </hibernate-configuration>
 

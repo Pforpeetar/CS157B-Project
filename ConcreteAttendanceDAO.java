@@ -11,7 +11,8 @@ public class ConcreteAttendanceDAO implements AttendanceDAO {
 	public List<Attendance> findByQuery(String query) {
 		Session session = sessionFactory.openSession();
 	    session.beginTransaction();
-		Query queryResult = session.createQuery(query);
+		//Query queryResult = session.createQuery(query);
+	    Query queryResult = session.createQuery("from band");
 		List<Attendance> result = queryResult.list();
 		session.getTransaction().commit();
 		session.close();
