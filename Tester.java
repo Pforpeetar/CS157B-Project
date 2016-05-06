@@ -13,9 +13,8 @@ public class Tester {
 		s.wheres.add("band");
 		s.wheres.add("date_table");
 		s.wheres.add("location");
-		s.orders.add("band.name");
-		s.orders.add("date_table.year");
-		s.orders.add("location.venue");
+		s.slices.add("band.name = 'Taylor Swift'");
+		s.slices.add("date_table.year = '2016'");
 		System.out.println(s.getStringQuery());
 	}
 
