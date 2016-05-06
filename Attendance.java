@@ -13,12 +13,15 @@ public class Attendance {
 	@Id
 	private int id;
 	
-	@Column(name ="location")
-	private int location;
-	@Column(name ="attendee")
-	private int attendee;
-	@Column(name ="date")
-	private int date;
+	@ManyToOne
+	@JoinColumn(name="location")
+	private Location location;
+	@ManyToOne
+	@JoinColumn(name="attendee")
+	private AttendeeDemographic attendee;
+	@ManyToOne
+	@JoinColumn(name="date")
+	private Date date;
 	@ManyToOne
 	@JoinColumn(name="band")
 	private Band band;
@@ -30,24 +33,6 @@ public class Attendance {
 	}
 	public void setId(int id) {
 		this.id = id;
-	}
-	public int getLocation_id() {
-		return location;
-	}
-	public void setLocation_id(int location_id) {
-		this.location = location_id;
-	}
-	public int getAttendee_id() {
-		return attendee;
-	}
-	public void setAttendee_id(int attendee_id) {
-		this.attendee = attendee_id;
-	}
-	public int getDate_id() {
-		return date;
-	}
-	public void setDate_id(int date_id) {
-		this.date = date_id;
 	}
 	
 	public int getAttendance_count() {
