@@ -1,6 +1,6 @@
 
 public enum DimensionEnum {
-	Band(1), Date(4), Location(4), AttendeeDemographic(3);
+	Band(1), Date(5), Location(4), AttendeeDemographic(3);
 	
 	private int size;
 	private DimensionEnum(int size) {

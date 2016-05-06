@@ -12,9 +12,8 @@ public class Tester {
 	public static void testPeter() {
 		System.out.println("\n\nPeter's Test");
 		sam.addDimension(DimensionEnum.Band, 1);
-		sam.addDimension(DimensionEnum.Date, 4);
-		sam.addDimension(DimensionEnum.Location, 1);
-		System.out.print("[");
+		
+		System.out.print("\n[");
 		for(Object o : dao.findByQuery(sam.getStringQuery())){
 			Object[] list = (Object[]) o;
 			//maybe instead of a nested for loop we can use an iterator in the DAO. Query has a method iterate(), and we can use an iterator to get each row
@@ -23,8 +22,18 @@ public class Tester {
 			}
 			System.out.print("\t");
 		}
-		sam.climbUpHierarchy(DimensionEnum.Location);
-		System.out.print("[");
+		sam.addDimension(DimensionEnum.Date, 2);
+		System.out.print("\n[");
+		for(Object o : dao.findByQuery(sam.getStringQuery())){
+			Object[] list = (Object[]) o;
+			//maybe instead of a nested for loop we can use an iterator in the DAO. Query has a method iterate(), and we can use an iterator to get each row
+			for(int i=0;i<list.length;i++){
+				System.out.print(list[i].toString().trim() + ", ");
+			}
+			System.out.print("\t");
+		}
+		sam.addDimension(DimensionEnum.Location, 1);
+		System.out.print("\n[");
 		for(Object o : dao.findByQuery(sam.getStringQuery())){
 			Object[] list = (Object[]) o;
 			//maybe instead of a nested for loop we can use an iterator in the DAO. Query has a method iterate(), and we can use an iterator to get each row
@@ -88,7 +97,7 @@ public class Tester {
 		} else if (input == 3) {
 			dimensionEnum = DimensionEnum.Date;
 			System.out.println("||====Choose Hierarchy Level:=====||");
-			System.out.println("|| Day[1], Day Of the Week[2], Month[3], Year[4] ||");
+			System.out.println("|| Day[1], Day Of the Week[2], Month[3], Quarter[4], Year[5] ||");
 			hierarchy = in.nextInt();
 		} else if (input == 4) {
 			dimensionEnum = DimensionEnum.AttendeeDemographic;

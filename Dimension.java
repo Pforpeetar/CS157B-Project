@@ -13,4 +13,25 @@ public class Dimension {
 			this.hierarchy = 1;
 		}
 	}
+	
+	public String getHierarchy() {
+		String bandHierarchy = Band.getBandHierarchy(hierarchy);
+		String dateHierarchy = Date.getDateHierarchy(hierarchy);
+		String locationHierarchy = Location.getLocationHierarchy(hierarchy);
+		String attendeeDemoHierarchy = AttendeeDemographic.getAttendeeHierarchy(hierarchy);
+		
+		if (dimension.equals(DimensionEnum.Band)) {
+			return bandHierarchy;
+		}
+		if (dimension.equals(DimensionEnum.Date)) {
+			return dateHierarchy;
+		}
+		if (dimension.equals(DimensionEnum.Location)) {
+			return locationHierarchy;
+		}
+		if (dimension.equals(DimensionEnum.AttendeeDemographic)) {
+			return attendeeDemoHierarchy;
+		}
+		return null;
+	}
 }
