@@ -43,30 +43,41 @@ public class SamsonBuilder {
 		slices.add(slice);
 	}
 	
-	public void addDimension(String s, int i) {
-		dimensions.add(new Dimension(s, i));
+	public void addDimension(DimensionEnum dim, int i) {
+		for (Dimension d : dimensions) {
+			if (d.dimension.equals(dim)) {
+				dimensions.remove(d);
+			}
+		}
+		dimensions.add(new Dimension(dim, i));
 	}
 	
-	public void removeDimension(String s) {
+	public void removeDimension(DimensionEnum dim) {
 		for (Dimension d : dimensions) {
-			if (d.dimension.equals(s)) {
+			if (d.dimension.equals(dim)) {
 				dimensions.remove(d);
 			}
 		}
 	}
 	
-	public void climbUpHierarchy(String s) {
+	public void climbUpHierarchy(DimensionEnum s) {
 		for (Dimension d : dimensions) {
 			if (d.dimension.equals(s)) {
 				d.hierarchy++;
+				if (d.hierarchy > d.dimension.getSize()) {
+					d.hierarchy = d.dimension.getSize();
+				}
 			}
 		}
 	}
 	
-	public void climbDownHierarchy(String s) {
+	public void climbDownHierarchy(DimensionEnum s) {
 		for (Dimension d : dimensions) {
 			if (d.dimension.equals(s)) {
 				d.hierarchy--;
+				if (d.hierarchy < 1) {
+					d.hierarchy = 1;
+				}
 			}
 		}
 	}
@@ -79,16 +90,16 @@ public class SamsonBuilder {
 			String locationHierarchy = Location.getLocationHierarchy(dimensions.get(i).hierarchy);
 			String attendeeDemoHierarchy = AttendeeDemographic.getAttendeeHierarchy(dimensions.get(i).hierarchy);
 			
-			if (!hierarchy.contains(bandHierarchy) && dimensions.get(i).dimension.equals("Band")) {
+			if (!hierarchy.contains(bandHierarchy) && dimensions.get(i).dimension.equals(DimensionEnum.Band)) {
 				hierarchy.add(bandHierarchy);
 			}
-			if (!hierarchy.contains(dateHierarchy) && dimensions.get(i).dimension.equals("Date")) {
+			if (!hierarchy.contains(dateHierarchy) && dimensions.get(i).dimension.equals(DimensionEnum.Date)) {
 				hierarchy.add(dateHierarchy);
 			}
-			if (!hierarchy.contains(locationHierarchy) && dimensions.get(i).dimension.equals("Location")) {
+			if (!hierarchy.contains(locationHierarchy) && dimensions.get(i).dimension.equals(DimensionEnum.Location)) {
 				hierarchy.add(locationHierarchy);
 			}
-			if (!hierarchy.contains(attendeeDemoHierarchy) && dimensions.get(i).dimension.equals("AttendeeDemographic")) {
+			if (!hierarchy.contains(attendeeDemoHierarchy) && dimensions.get(i).dimension.equals(DimensionEnum.AttendeeDemographic)) {
 				hierarchy.add(attendeeDemoHierarchy);
 			}
 		}
@@ -98,10 +109,11 @@ public class SamsonBuilder {
 	private String generateGroupBy() {
 		String str = "";
 		for (int i = 0; i < dimensions.size(); i++) {
+			String d = dimensions.get(i).dimension.toString();
 			if (i == dimensions.size() - 1) {
-				str += dimensions.get(i).dimension.toLowerCase() + "." + hierarchy.get(i);
+				str += d.toLowerCase() + "." + hierarchy.get(i);
 			} else {
-				str += dimensions.get(i).dimension.toLowerCase() + "." + hierarchy.get(i) + ", ";
+				str += d.toLowerCase() + "." + hierarchy.get(i) + ", ";
 			}
 		}
 		return str;
@@ -118,10 +130,11 @@ public class SamsonBuilder {
 	private String generateSelect() {
 		String str = "";
 		for (int i = 0; i < hierarchy.size(); i++) {
+			String d = dimensions.get(i).dimension.toString();
 			if (i == dimensions.size() - 1) {
-				str += dimensions.get(i).dimension.toLowerCase() + "." + hierarchy.get(i);
+				str += d.toLowerCase() + "." + hierarchy.get(i);
 			} else {
-				str += dimensions.get(i).dimension.toLowerCase() + "." + hierarchy.get(i) + ", ";
+				str += d.toLowerCase() + "." + hierarchy.get(i) + ", ";
 			}
 		}
 		return str;
@@ -130,10 +143,11 @@ public class SamsonBuilder {
 	private String generateFrom() {
 		String str = "";
 		for (int i = 0; i < dimensions.size(); i++) {
+			String d = dimensions.get(i).dimension.toString();
 			if (i == dimensions.size() - 1) {
-				str += dimensions.get(i).dimension + " " + dimensions.get(i).dimension.toLowerCase()  + " ";
+				str += dimensions.get(i).dimension + " " + d.toLowerCase()  + " ";
 			} else {
-				str += dimensions.get(i).dimension + " " + dimensions.get(i).dimension.toLowerCase()  + ", ";
+				str += dimensions.get(i).dimension + " " + d.toLowerCase()  + ", ";
 			}
 		}
 		return str;
@@ -142,10 +156,11 @@ public class SamsonBuilder {
 	private String generateWhere() {
 		String str = "";
 		for (int i = 0; i < dimensions.size(); i++) {
+			String d = dimensions.get(i).dimension.toString();
 			if (i == 0) {
-				str += "a." + dimensions.get(i).dimension.toLowerCase() +  "=" + dimensions.get(i).dimension.toLowerCase() + ".id ";
+				str += "a." + d.toLowerCase() +  "=" + d.toLowerCase() + ".id ";
 			} else {
-				str += "AND a." + dimensions.get(i).dimension.toLowerCase() +  "=" + dimensions.get(i).dimension.toLowerCase() + ".id ";
+				str += "AND a." + d.toLowerCase() +  "=" + d.toLowerCase() + ".id ";
 			}
 		}
 		return str;
