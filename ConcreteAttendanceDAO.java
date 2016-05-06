@@ -8,13 +8,11 @@ public class ConcreteAttendanceDAO implements AttendanceDAO {
 	private static SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
 	
 	@Override
-	public List<Attendance> findByQuery(String queryString) {
+	public List<Attendance> findByQuery(CriteriaBuilder cb) {
 		Session session = sessionFactory.openSession();
 		session.beginTransaction();
-		
-		Query query = session.createQuery(queryString);
 
-		List<Attendance> result = query.list();
+		List<Attendance> result = cb.getCriteria().list();
 		
 		session.getTransaction().commit();
 		session.close();
