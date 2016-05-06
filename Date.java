@@ -18,4 +18,17 @@ public class Date {
 	
 	@OneToMany(mappedBy="date", targetEntity = Attendance.class, fetch=FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval=true)
 	private List<Attendance> attendance;
+	
+	public static String getDateHierarchy(int i) {
+		if (i == 1) {
+			return "day";
+		} else if (i == 2) {
+			return "month";
+		} else if (i == 3) {
+			return "quarter";
+		} else if (i == 4) {
+			return "year";
+		}
+		return null;
+	}
 }

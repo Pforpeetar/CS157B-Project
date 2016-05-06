@@ -3,15 +3,26 @@ public class Tester {
 	
 	public static void main(String[] args) {
 		SamsonBuilder s = new SamsonBuilder();
-		s.selects.add("name");
-		s.froms.add("Band");
-		s.wheres.add("Band");
-		s.slices.add("Band.name = 'Taylor Swift'");
 		
+		s.addDimension("Location", 3);
+		ConcreteAttendanceDAO dao = new ConcreteAttendanceDAO();
+		String hql = "select band.name, sum(a.attendance_count) from Attendance a, Band band where a.band=band.id group by band.name";
 
+		System.out.println(hql);
+		System.out.println(s.getStringQuery());
+		
+		System.out.print("[");
+		for(Object o : dao.findByQuery(s.getStringQuery())){
+			Object[] ah = (Object[])o;
+			System.out.print("band name: " + ah[0]);
+			System.out.print(", count: " + ah[1] + "  ");
+		}
+		System.out.println("]");
+		
+		/*
 		//testing for band connection, also query for olap example
 		String hql = "select band.name, sum(a.attendance_count) from Attendance a, Band band where a.band=band.id group by band.name";
-		ConcreteAttendanceDAO dao = new ConcreteAttendanceDAO();
+		
 		System.out.print("[");
 		for(Object o : dao.findByQuery(hql)){
 			Object[] ah = (Object[])o;
@@ -35,7 +46,7 @@ public class Tester {
 		hql = "select age from AttendeeDemographic";
 		System.out.println(dao.findByQuery(hql));
 		
-		
+		System.out.println("CENTRAL CUBE: ");
 		//testing for central cube
 		hql = "select band.name, date.year, loc.venue, sum(a.attendance_count) from Attendance a, Band band, Date date, Location loc where a.band=band.id and"
 				+ " a.date = date.id and a.location = loc.id group by band.name, date.year, loc.venue";
@@ -48,6 +59,28 @@ public class Tester {
 			}
 			System.out.print("\t");
 		}
+		*/
+		
+	}
+	
+	public static void rollUpHierarchy() {
+		
+	}
+	
+	public static void rollUpDimension() {
+		
+	}
+	
+	public static void drillDownDimension() {
+		
+	}
+	
+	public static void drillDownHierarchy() {
+		
+	}
+	
+	public static void addSlice() {
+		
 	}
 
 }

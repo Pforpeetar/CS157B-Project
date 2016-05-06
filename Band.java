@@ -20,4 +20,11 @@ public class Band {
 	public String toString(){
 		return id + " " + name;
 	}
+	
+	public static String getBandHierarchy(int i) {
+		if (i == 1) {
+			return "name";
+		}
+		return null;
+	}
 }
