@@ -1,20 +1,28 @@
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 
 @Entity
-@Table(name = "ATTENDANCE_TABLE")
+//@Table(name = "attendance")
 public class Attendance {
 	@Id
-	@GeneratedValue
 	private int id;
 	
-	private int location_id;
-	private int attendee_id;
-	private int date_id;
-	private int band_id;
+	@Column(name ="location")
+	private int location;
+	@Column(name ="attendee")
+	private int attendee;
+	@Column(name ="date")
+	private int date;
+	@ManyToOne
+	@JoinColumn(name="band")
+	private Band band;
+	@Column(name ="attendance_count")
 	private int attendance_count;
 	
 	public int getId() {
@@ -24,29 +32,24 @@ public class Attendance {
 		this.id = id;
 	}
 	public int getLocation_id() {
-		return location_id;
+		return location;
 	}
 	public void setLocation_id(int location_id) {
-		this.location_id = location_id;
+		this.location = location_id;
 	}
 	public int getAttendee_id() {
-		return attendee_id;
+		return attendee;
 	}
 	public void setAttendee_id(int attendee_id) {
-		this.attendee_id = attendee_id;
+		this.attendee = attendee_id;
 	}
 	public int getDate_id() {
-		return date_id;
+		return date;
 	}
 	public void setDate_id(int date_id) {
-		this.date_id = date_id;
+		this.date = date_id;
 	}
-	public int getBand_id() {
-		return band_id;
-	}
-	public void setBand_id(int band_id) {
-		this.band_id = band_id;
-	}
+	
 	public int getAttendance_count() {
 		return attendance_count;
 	}

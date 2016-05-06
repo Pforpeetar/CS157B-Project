@@ -5,21 +5,21 @@ public class Tester {
 		// TODO Auto-generated method stub
 		SamsonBuilder s = new SamsonBuilder();
 		s.selects.add("name");
-		s.selects.add("year");
-		s.selects.add("venue");
-		s.froms.add("band");
-		s.froms.add("date_table");
-		s.froms.add("location");
-		s.wheres.add("band");
-		s.wheres.add("date_table");
-		s.wheres.add("location");
-		s.slices.add("band.name = 'Taylor Swift'");
-		s.slices.add("date_table.year = '2016'");
+		s.froms.add("Band");
+		s.wheres.add("Band");
+		s.slices.add("Band.name = 'Taylor Swift'");
 		
+		
+		String hql = "select band.name, sum(a.attendance_count) from Attendance a, Band band where a.band=band.id group by band.name";
 		ConcreteAttendanceDAO dao = new ConcreteAttendanceDAO();
-		System.out.println(s.getStringQuery());
-		dao.findByQuery(s.getStringQuery());
-		System.out.println(dao.findByQuery(s.getStringQuery()));
+		for(Object o : dao.findByQuery(hql)){
+			Object[] ah = (Object[])o;
+			System.out.println("band name: " + ah[0]);
+			System.out.println("count: " + ah[1]);
+		}
+
+//		System.out.println(s.getStringQuery());
+//		dao.findByQuery(s.getStringQuery());
 	}
 
 }

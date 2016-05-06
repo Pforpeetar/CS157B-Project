@@ -8,12 +8,12 @@ public class ConcreteAttendanceDAO implements AttendanceDAO {
 	private static SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
 	
 	@Override
-	public List<Attendance> findByQuery(String query) {
+	public List findByQuery(String query) {
 		Session session = sessionFactory.openSession();
 	    session.beginTransaction();
-		//Query queryResult = session.createQuery(query);
-	    Query queryResult = session.createQuery("from band");
-		List<Attendance> result = queryResult.list();
+		Query queryResult = session.createQuery(query);
+		//TODO: make a data structure or something to store the result
+		List result = queryResult.list();
 		session.getTransaction().commit();
 		session.close();
 		return result;
