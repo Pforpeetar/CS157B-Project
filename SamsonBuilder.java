@@ -45,19 +45,20 @@ public class SamsonBuilder {
 	}
 	
 	public void addDimension(DimensionEnum dim, int i) {
-		for (Dimension d : dimensions) {
-			if (d.dimension.equals(dim)) {
-				dimensions.remove(d);
-			}
-		}
+		removeDimension(dim);
 		dimensions.add(new Dimension(dim, i));
 	}
 	
 	public void removeDimension(DimensionEnum dim) {
-		for (Dimension d : dimensions) {
-			if (d.dimension.equals(dim)) {
-				hierarchy.remove(d.getHierarchy());
-				dimensions.remove(d);
+//		for (Dimension d : dimensions) {
+//			if (d.dimension.equals(dim)) {
+//				dimensions.remove(d);
+//			}
+//		}
+		for (int i = 0; i < dimensions.size(); i++) {
+			if (dimensions.get(i).dimension.equals(dim)) {
+				hierarchy.remove(dimensions.get(i).getHierarchy());
+				dimensions.remove(dimensions.get(i));
 			}
 		}
 	}

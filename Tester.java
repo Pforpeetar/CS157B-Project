@@ -12,27 +12,20 @@ public class Tester {
 	public static void testPeter() {
 		System.out.println("\n\nPeter's Test");
 		sam.addDimension(DimensionEnum.Band, 1);
-		
-		System.out.print("\n[");
-		for(Object o : dao.findByQuery(sam.getStringQuery())){
-			Object[] list = (Object[]) o;
-			//maybe instead of a nested for loop we can use an iterator in the DAO. Query has a method iterate(), and we can use an iterator to get each row
-			for(int i=0;i<list.length;i++){
-				System.out.print(list[i].toString().trim() + ", ");
-			}
-			System.out.print("\t");
-		}
+		printList();
 		sam.addDimension(DimensionEnum.Date, 2);
-		System.out.print("\n[");
-		for(Object o : dao.findByQuery(sam.getStringQuery())){
-			Object[] list = (Object[]) o;
-			//maybe instead of a nested for loop we can use an iterator in the DAO. Query has a method iterate(), and we can use an iterator to get each row
-			for(int i=0;i<list.length;i++){
-				System.out.print(list[i].toString().trim() + ", ");
-			}
-			System.out.print("\t");
-		}
+		printList();
 		sam.addDimension(DimensionEnum.Location, 1);
+		printList();
+		sam.climbUpHierarchy(DimensionEnum.Location);
+		printList();
+		sam.climbDownHierarchy(DimensionEnum.Location);
+		printList();
+		sam.removeDimension(DimensionEnum.Location);
+		printList();
+	}
+	
+	public static void printList() {
 		System.out.print("\n[");
 		for(Object o : dao.findByQuery(sam.getStringQuery())){
 			Object[] list = (Object[]) o;
