@@ -6,7 +6,7 @@ public class Tester {
 	public static void main(String[] args) {
 		//testSamson();
 		//testPeter();
-		testConsole();
+		//testConsole();
 	}
 
 	public static void testPeter() {
@@ -22,6 +22,8 @@ public class Tester {
 		sam.climbDownHierarchy(DimensionEnum.Location);
 		printList();
 		sam.removeDimension(DimensionEnum.Location);
+		printList();
+		sam.addSlice(DimensionEnum.Band, "Adele");
 		printList();
 	}
 	
@@ -58,6 +60,7 @@ public class Tester {
 	public static DimensionEnum chooseDimension(Scanner in) {
 		System.out.println("||====Choose Payment:=====||");
 		System.out.println("||[1]Band, [2]Location, [3]Date, [4]AttendeeDemographic||");
+		System.out.println("Input: ");
 		int input = in.nextInt();
 		DimensionEnum dimensionEnum = null;
 		if (input == 1) {
@@ -79,6 +82,7 @@ public class Tester {
 	public static void rollUpDimension(Scanner in) {
 		System.out.println("||====Choose Payment:=====||");
 		System.out.println("||[1]Band, [2]Location, [3]Date, [4]AttendeeDemographic||");
+		System.out.println("Input: ");
 		int input = in.nextInt();
 		DimensionEnum dimensionEnum = null;
 		int hierarchy = 1;
@@ -88,16 +92,19 @@ public class Tester {
 			dimensionEnum = DimensionEnum.Location;;
 			System.out.println("||====Choose Hierarchy Level:=====||");
 			System.out.println("|| Venue[1], City[2], State[3], Country[4] ||");
+			System.out.println("Input: ");
 			hierarchy = in.nextInt();
 		} else if (input == 3) {
 			dimensionEnum = DimensionEnum.Date;
 			System.out.println("||====Choose Hierarchy Level:=====||");
 			System.out.println("|| Day[1], Day Of the Week[2], Month[3], Quarter[4], Year[5] ||");
+			System.out.println("Input: ");
 			hierarchy = in.nextInt();
 		} else if (input == 4) {
 			dimensionEnum = DimensionEnum.AttendeeDemographic;
 			System.out.println("||====Choose Hierarchy Level:=====||");
 			System.out.println("|| Gender[1], Race[2], age[3] ||");
+			System.out.println("Input: ");
 			hierarchy = in.nextInt();
 		}
 		
@@ -113,7 +120,26 @@ public class Tester {
 	}
 	
 	public static void addSlice(Scanner in) {
+		System.out.println("||====Choose Payment:=====||");
+		System.out.println("||[1]Band, [2]Location, [3]Date, [4]AttendeeDemographic||");
+		System.out.println("Input: ");
+		int input = in.nextInt();
+		DimensionEnum dimensionEnum = null;
+		String slice = "";
+		if (input == 1) {
+			dimensionEnum = DimensionEnum.Band;
+		} else if (input == 2) {
+			dimensionEnum = DimensionEnum.Location;;
+		} else if (input == 3) {
+			dimensionEnum = DimensionEnum.Date;
+		} else if (input == 4) {
+			dimensionEnum = DimensionEnum.AttendeeDemographic;
+		}
 		
+		System.out.println("||====Enter Slice:=====||");
+		System.out.println("Input: ");
+		slice = in.next();
+		sam.addSlice(dimensionEnum, slice);
 	}
 	
 	static void promptInput(Scanner in) {

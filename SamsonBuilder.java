@@ -5,18 +5,18 @@ import java.util.List;
 public class SamsonBuilder {
 	private ArrayList<String> hierarchy;
 	private ArrayList<Dimension> dimensions;
-	private ArrayList<String> slices;
+	private ArrayList<Slice> slices;
 	
 	public SamsonBuilder() {
 		hierarchy = new ArrayList<String>();
 		dimensions = new ArrayList<Dimension>();
-		slices = new ArrayList<String>();
+		slices = new ArrayList<Slice>();
 	}
 	
 	public SamsonBuilder(ArrayList<Dimension> dimensions) {
 		hierarchy = new ArrayList<String>();
 		this.dimensions = dimensions;
-		slices = new ArrayList<String>();
+		slices = new ArrayList<Slice>();
 	}
 	
 	public String getStringQuery() {
@@ -33,15 +33,14 @@ public class SamsonBuilder {
 		from += generateFrom();
 		group += generateGroupBy();
 		where += generateWhere();
-		where += generateSlice(slices);
-		
+		where += generateSlice();
 		queryResult = select + from + where + group;
 		//System.out.println(queryResult);
 		return queryResult;
 	}
 	
-	public void addSlice(String slice) {
-		slices.add(slice);
+	public void addSlice(DimensionEnum dimension, String slice) {
+		slices.add(new Slice(dimension, slice));
 	}
 	
 	public void addDimension(DimensionEnum dim, int i) {
@@ -153,10 +152,16 @@ public class SamsonBuilder {
 		return str;
 	}
 	
-	private String generateSlice(ArrayList<String> arr) {
+	private String generateSlice() {
 		String str = "";
-		for (int i = 0; i < arr.size(); i++) {
-				str += "AND " + arr.get(i);
+		
+		for (int i = 0; i < slices.size(); i++) {
+			for (Dimension d : dimensions) {
+				if (slices.get(i).dimension.equals(d.dimension)) {
+					str += " AND " + d.dimension.toString().toLowerCase() + "." + d.getHierarchy() + "='" + slices.get(i).slice + "' ";
+					System.out.println("\nStr: " + str);
+				}
+			}
 		}
 		return str;
 	}
