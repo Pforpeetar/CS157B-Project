@@ -5,8 +5,8 @@ public class Tester {
 	static ConcreteAttendanceDAO dao = new ConcreteAttendanceDAO();
 	public static void main(String[] args) {
 		//testSamson();
-		testPeter();
-		//testConsole();
+		//testPeter();
+		testConsole();
 	}
 
 	public static void testPeter() {
@@ -37,12 +37,6 @@ public class Tester {
 		}
 	}
 	
-	public static void testConsole() {
-		Scanner in = new Scanner(System.in);
-		promptInput(in);
-		in.close();
-	}
-	
 	public static void printQuery() {
 		System.out.print("[");
 		for(Object o : dao.findByQuery(sam.getStringQuery())){
@@ -52,6 +46,14 @@ public class Tester {
 		}
 		System.out.println("]");
 	}
+	
+	public static void testConsole() {
+		Scanner in = new Scanner(System.in);
+		promptInput(in);
+		in.close();
+	}
+	
+
 	
 	public static DimensionEnum chooseDimension(Scanner in) {
 		System.out.println("||====Choose Payment:=====||");
@@ -122,26 +124,26 @@ public class Tester {
 		int input = in.nextInt();
 		if (input == 3) {
 			rollUpHierarchy(in);
-			printQuery();
+			printList();
 			promptInput(in);
 		} else if (input == 4) {
 			drillDownHierarchy(in);
-			printQuery();
+			printList();
 			promptInput(in);
 		} else if (input == 1) {
 			rollUpDimension(in);
-			printQuery();
+			printList();
 			promptInput(in);
 		} else if (input == 2) {
 			drillDownDimension(in);
-			printQuery();
+			printList();
 			promptInput(in);
 		} else if (input == 5) {
 			addSlice(in);
-			printQuery();
+			printList();
 			promptInput(in);
 		} else if (input == 6) {
-			printQuery();
+			printList();
 			promptInput(in);
 		} else if (input == 7){
 			System.exit(0);
