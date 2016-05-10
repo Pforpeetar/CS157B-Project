@@ -25,15 +25,14 @@
         <!-- <property name="show_sql">true</property> -->
 		<property name="hibernate.enable_lazy_load_no_trans">true</property>
         <!-- Drop the existing tables and create new one -->
-        <property name="hbm2ddl.auto">create</property>
+        <!--<property name="hbm2ddl.auto">create</property> -->
  
         <!-- Mention here all the model classes along with their package name -->
-        
-        <mapping class="Band"/>
-        <mapping class="Location"/>
-        <mapping class="Date"/>
-        <mapping class="AttendeeInfo"/>
         <mapping class="Attendance"/>
+        <mapping class="Band"/>
+        <mapping class="Date"/>
+        <mapping class="Location"/>
+        <mapping class="AttendeeDemographic"/>
 </session-factory>
 </hibernate-configuration>
 
