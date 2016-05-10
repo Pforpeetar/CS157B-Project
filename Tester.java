@@ -5,7 +5,7 @@ public class Tester {
 	static ConcreteAttendanceDAO dao = new ConcreteAttendanceDAO();
 	public static void main(String[] args) {
 		//testSamson();
-		//testPeter();
+		testPeter();
 		//testConsole();
 	}
 
@@ -17,13 +17,17 @@ public class Tester {
 		printList();
 		sam.addDimension(DimensionEnum.Location, 1);
 		printList();
-		sam.climbUpHierarchy(DimensionEnum.Location);
+		sam.addDimension(DimensionEnum.AttendeeDemographic, 1);
 		printList();
-		sam.climbDownHierarchy(DimensionEnum.Location);
+		sam.climbUpHierarchy(DimensionEnum.Date);
+		printList();
+		sam.climbDownHierarchy(DimensionEnum.Date);
 		printList();
 		sam.removeDimension(DimensionEnum.Location);
 		printList();
 		sam.addSlice(DimensionEnum.Band, "Adele");
+		printList();
+		sam.addSlice(DimensionEnum.Date, "Saturday");
 		printList();
 	}
 	
