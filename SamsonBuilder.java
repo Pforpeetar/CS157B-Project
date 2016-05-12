@@ -39,6 +39,10 @@ public class SamsonBuilder {
 		slices.add(new Slice(dimension, slice));
 	}
 	
+	public void removeSlices() {
+		slices.removeAll(slices);
+	}
+	
 	public void addDimension(DimensionEnum dim, int i) {
 		removeDimension(dim);
 		dimensions.add(new Dimension(dim, i));
